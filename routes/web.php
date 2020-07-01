@@ -56,6 +56,8 @@ Route::group(['middleware' => ['auth']], function () {
         'show'
     ]);
 
+    Route::get('/budgets', 'BudgetController@index');
+
     Route::resource('/tags', 'TagController')->only([
         'index',
         'create',

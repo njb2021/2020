@@ -8,6 +8,15 @@ use Exception;
 
 class BudgetRepository
 {
+    public function getActive()
+    {
+        $today = date('Y-m-d');
+
+        return Budget::whereRaw('starts_on <= ?', [$today])
+            ->whereRaw('ends_on >= ? OR ends_on IS NULL', [$today])
+            ->get();
+    }
+
     public function getById(int $id): ?Budget
     {
         return Budget::find($id);
